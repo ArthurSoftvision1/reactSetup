@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { FormErrors } from './FormErrors';
 import './Form.css';
+const validator = require('validator');
 
 class Form extends Component {
-  constructor (props) { // initialize the initial state in the constructor
+  constructor (props) {
     super(props);
     this.state = {
-      email: '', // empty string
-      password: '', // empty string
+      email: '',
+      password: '',
       formErrors: {email: '', password: ''},
       emailValid: false,
       passwordValid: false,
@@ -15,11 +16,11 @@ class Form extends Component {
     }
   }
 
-  handleUserInput = (e) => { // handle input state
+  handleUserInput = (e) => { 
     const name = e.target.name;
     const value = e.target.value;
     this.setState({[name]: value},
-                  () => { this.validateField(name, value) });
+      () => { this.validateField(name, value) });
   }
 
   validateField(fieldName, value) {
@@ -29,33 +30,36 @@ class Form extends Component {
 
     switch(fieldName) {
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i); // checks if the e-mail is matching the REGEX
+        emailValid = validator.isEmail(value);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
+
       case 'password':
-        passwordValid = value.length >= 6; // checks if password is longer than 6 characters
+        passwordValid = value.length >= 6; 
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         break;
+
       default:
         break;
     }
-    this.setState({formErrors: fieldValidationErrors, // set state for the form
-                    emailValid: emailValid,
-                    passwordValid: passwordValid
-                  }, this.validateForm);
+
+    this.setState({formErrors: fieldValidationErrors, 
+      emailValid: emailValid,
+      passwordValid: passwordValid
+      }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid}); // set state for the form if email and password are valid
+    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
   }
 
-  errorClass(error) { // apply bootstrap error if error exists
+  errorClass(error) { 
     return(error.length === 0 ? '' : 'has-error');
   }
 
   render () {
     return (
-      <form className="demoForm">
+      <form className="form-section">
         <h2>Basic Form</h2>
         <div className="panel panel-default">
           <FormErrors formErrors={this.state.formErrors} />
@@ -67,7 +71,7 @@ class Form extends Component {
 
           <input type="email" required className="form-control" name="email"
             placeholder="Email"
-            value={this.state.email} // get initial email state value
+            value={this.state.email} 
             onChange={this.handleUserInput} />
 
         </div>
@@ -78,7 +82,7 @@ class Form extends Component {
 
           <input type="password" className="form-control" name="password"
             placeholder="Password"
-            value={this.state.password} // get initial password state value
+            value={this.state.password} 
             onChange={this.handleUserInput} />
 
         </div>

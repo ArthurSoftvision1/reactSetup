@@ -18,3 +18,10 @@ textarea.form-control {
   margin: 0 auto;
   text-align: center;
 }
+
+.errors-container {
+  border: 1px solid red;
+  border-radius: 2px;
+  background-color: red;
+  color: white;
+}
