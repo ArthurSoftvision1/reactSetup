@@ -3,6 +3,7 @@ import { FormErrors } from './FormErrors';
 import './Form.css';
 const validator = require('validator');
 
+
 class Form extends Component {
   constructor (props) {
     super(props);
@@ -16,11 +17,11 @@ class Form extends Component {
     }
   }
 
-  handleUserInput = (e) => { 
+  handleUserInput(e) {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({[name]: value},
-      () => { this.validateField(name, value) });
+    this.validateField(name, value));
   }
 
   validateField(fieldName, value) {
@@ -72,7 +73,7 @@ class Form extends Component {
           <input type="email" required className="form-control" name="email"
             placeholder="Email"
             value={this.state.email} 
-            onChange={this.handleUserInput} />
+            onChange={this.handleUserInput.bind(this)} />
 
         </div>
 
@@ -83,11 +84,11 @@ class Form extends Component {
           <input type="password" className="form-control" name="password"
             placeholder="Password"
             value={this.state.password} 
-            onChange={this.handleUserInput} />
+            onChange={this.handleUserInput.bind(this)} />
 
         </div>
 
-        <select class="select-list">
+        <select className="select-list">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
@@ -96,21 +97,21 @@ class Form extends Component {
           <option value="mercedes">Mercedes</option>
         </select> <br/>
 
-        <label class="radio-inline">
+        <label className="radio-inline">
           <input type="radio" name="first"/>Option 1
         </label>
 
-        <label class="radio-inline">
+        <label className="radio-inline">
           <input type="radio" name="second"/>Option 2
         </label>
 
-        <label class="radio-inline">
+        <label className="radio-inline">
           <input type="radio" name="third"/>Option 3
         </label>
 
-        <div class="form-group">
-          <label for="comment">Comment:</label>
-          <textarea class="form-control" rows="4" id="comment" textarea="textarea"></textarea>
+        <div className="form-group">
+          <label htmlFor="comment">Comment:</label>
+          <textarea className="form-control" rows="4" id="comment" textarea="textarea"></textarea>
         </div>
 
         <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Submit</button>
