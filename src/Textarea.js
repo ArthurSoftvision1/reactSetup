@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-class TextareaComponent extends Component {
+class Textarea extends Component {
     render() {
-  
-      return (
-        <div className="form-group">
-            <textarea className="form-control" rows="4" id="comment" textarea="textarea"></textarea>
-        </div>
-      );
+
+        return (
+            <div className="form-group">
+                <label htmlFor="comments">Comments</label>
+                <textarea name={this.props.name} rows="4" id="comment" type={this.props.type} placeholder={this.props.placeholder}></textarea>
+            </div>
+        );
     }
-  }
-  
-  export default TextareaComponent;
+}
+
+export default Textarea;

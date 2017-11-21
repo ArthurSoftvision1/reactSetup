@@ -5,12 +5,12 @@ const validator = require('validator');
 
 
 class Form extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
-      formErrors: {email: '', password: ''},
+      formErrors: { email: '', password: '' },
       emailValid: false,
       passwordValid: false,
       formValid: false
@@ -20,8 +20,8 @@ class Form extends Component {
   handleUserInput(e) {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({[name]: value},
-    this.validateField(name, value));
+    this.setState({ [name]: value },
+      this.validateField(name, value));
   }
 
   validateField(fieldName, value) {
@@ -29,36 +29,37 @@ class Form extends Component {
     let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
 
-    switch(fieldName) {
+    switch (fieldName) {
       case 'email':
         emailValid = validator.isEmail(value);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
 
       case 'password':
-        passwordValid = value.length >= 6; 
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        passwordValid = value.length >= 6;
+        fieldValidationErrors.password = passwordValid ? '' : ' is too short';
         break;
 
       default:
         break;
     }
 
-    this.setState({formErrors: fieldValidationErrors, 
+    this.setState({
+      formErrors: fieldValidationErrors,
       emailValid: emailValid,
       passwordValid: passwordValid
-      }, this.validateForm);
+    }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    this.setState({ formValid: this.state.emailValid && this.state.passwordValid });
   }
 
-  errorClass(error) { 
-    return(error.length === 0 ? '' : 'has-error');
+  errorClass(error) {
+    return (error.length === 0 ? '' : 'has-error');
   }
 
-  render () {
+  render() {
     return (
       <form className="form-section">
         <h2>Basic Form</h2>
@@ -66,13 +67,13 @@ class Form extends Component {
           <FormErrors formErrors={this.state.formErrors} />
         </div>
 
-        <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}> 
+        <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
 
           <label htmlFor="email">Email address</label>
 
           <input type="email" required className="form-control" name="email"
             placeholder="Email"
-            value={this.state.email} 
+            value={this.state.email}
             onChange={this.handleUserInput.bind(this)} />
 
         </div>
@@ -83,7 +84,7 @@ class Form extends Component {
 
           <input type="password" className="form-control" name="password"
             placeholder="Password"
-            value={this.state.password} 
+            value={this.state.password}
             onChange={this.handleUserInput.bind(this)} />
 
         </div>
@@ -95,18 +96,18 @@ class Form extends Component {
           <option value="audi">Audi</option>
           <option value="bmw">Bmw</option>
           <option value="mercedes">Mercedes</option>
-        </select> <br/>
+        </select> <br />
 
         <label className="radio-inline">
-          <input type="radio" name="first"/>Option 1
+          <input type="radio" name="first" />Option 1
         </label>
 
         <label className="radio-inline">
-          <input type="radio" name="second"/>Option 2
+          <input type="radio" name="second" />Option 2
         </label>
 
         <label className="radio-inline">
-          <input type="radio" name="third"/>Option 3
+          <input type="radio" name="third" />Option 3
         </label>
 
         <div className="form-group">
