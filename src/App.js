@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Form from './Form.js';
 import GenericForm from './GenericForm.js';
+import myFields from './myFields.js';
+
 
 class App extends Component {
   render() {
