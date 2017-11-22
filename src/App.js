@@ -12,17 +12,18 @@ class App extends Component {
     let myFields = {
       title: 'Register Form',
       fields: [
-        { name: 'email', type: 'text', value: 'val', placeholder: 'Insert an e-mail', validations: [] },
-        { name: 'password', type: 'password', value: 'password', placeholder: 'Insert a password' },
-        { name: 'comments', type: 'textarea', value: 'val', placeholder: 'Add a comment' },
-        { name: 'gender', type: 'radio', id: ['male', 'female', 'other'], value: ['male', 'female', 'other']},
-        { name: 'select', type: 'select', value: ['volvo', 'saab', 'opel', 'audi', 'bmw', 'mercedes'] },
-        { name:'Gender', type: 'radio', value: [
-           { id: 'male', value: 'male', caption: 'Male', selected:true}, 
-           { id: 'female', value: 'female', caption: 'Female'}, 
-           { id: 'other', value: 'other', caption: 'Other'}], validations: [] }
+        { label: 'E-mail', name: 'email', type: 'text', value: 'val', placeholder: 'Insert an e-mail', validations: [] },
+        { label: 'Password', name: 'password', type: 'password', value: 'password', placeholder: 'Insert a password' },
+        { label: 'Comments', name: 'comments', type: 'textarea', value: 'val', placeholder: 'Add a comment' },
+        { label: 'Select', name: 'select', type: 'select', value: ['Volvo', 'Saab', 'Opel', 'Audi', 'Bmw', 'Mercedes'] },
+        {
+          label: 'Gender', name: 'gender', type: 'radio', value: [
+            { id: 'male', value: 'male', label: 'Male', selected: true },
+            { id: 'female', value: 'female', label: 'Female' },
+            { id: 'other', value: 'other', label: 'Other' }], validations: []
+        }
       ],
-     
+
       onSubmit: this.customHandleSubmit
     }
     return (

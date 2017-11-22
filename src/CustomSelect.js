@@ -3,15 +3,27 @@ import './App.css';
 
 class CustomSelect extends Component {
   render() {
+
+    let labelText = this.props.type === "select" ? this.props.label : this.props.name
+
+    let selectNodes = [];
+    let value = this.props.value;
+
+    for (let i = 0; i < value.length; i++) {
+
+      let obj = {
+        value: value[i], key: i
+      }
+
+      let node = (<option key={obj.key} value={obj.value}>{obj.value}</option>);
+      selectNodes.push(node);
+    }
+
     return (
       <div className="form-group">
-        <select name={this.props.name} type={this.props.type} className="select-list">
-          <option value={this.props.value[0]}>Volvo</option>
-          <option value={this.props.value[1]}>Saab</option>
-          <option value={this.props.value[2]}>Opel</option>
-          <option value={this.props.value[3]}>Audi</option>
-          <option value={this.props.value[4]}>Bmw</option>
-          <option value={this.props.value[5]}>Mercedes</option>
+        <label>{labelText}</label>
+        <select name={this.props.name}>
+          {selectNodes}
         </select>
       </div>
     );

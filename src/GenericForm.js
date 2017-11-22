@@ -40,11 +40,11 @@ class GenericForm extends Component {
     }, this)
 
     return (
-      <div>
+      <div className="form-container">
         <form onSubmit={this.props.onSubmit}>
-          <h2>{this.props.title}</h2>
+          <h2 className="form-title">{this.props.title}</h2>
           {childNodes}
-          <button>Submit</button>
+          <button className="submit-button">Submit</button>
         </form>
       </div>
     );
