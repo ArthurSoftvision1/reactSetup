@@ -1,58 +1,54 @@
 import React, { Component } from 'react';
 import './App.css';
-import Input from './Input.js';
-import Textarea from './Textarea.js';
-import Title from './Title.js';
-import Radio from './Radio.js';
-import Select from './Select.js';
-import Password from './Password.js';
+import CustomInput from './CustomInput.js';
+import CustomTextarea from './CustomTextarea.js';
+import CustomRadio from './CustomRadio.js';
+import CustomSelect from './CustomSelect.js';
+import CustomPassword from './CustomPassword.js';
 
 class GenericForm extends Component {
 
-    render() {
+  render() {
+    let childNodes = [];
+    let fields = this.props.fields;
 
-        let childNodes = [];
+    fields.forEach(function (el, i) {
 
-        let fields = this.props.fields;
+      let obj = {
+        ...el, key: i
+      }
 
-        fields.forEach(function (el, i) {
+      switch (el.type) {
+        case "text":
+          childNodes.push(<CustomInput {...obj} />)
+          break;
+        case "password":
+          childNodes.push(<CustomPassword {...obj} />)
+          break;
+        case "textarea":
+          childNodes.push(<CustomTextarea {...obj} />)
+          break;
+        case "radio":
+          childNodes.push(<CustomRadio {...obj} />)
+          break;
+        case "select":
+          childNodes.push(<CustomSelect {...obj} />)
+          break;
+        default:
+          childNodes.push(<CustomInput {...obj} />)
+      }
+    }, this)
 
-            let obj = {
-                ...el, key: i
-            }
-
-            switch (el.type) {
-                case "text":
-                    childNodes.push(<Input {...obj} />)
-                    break;
-                case "password":
-                    childNodes.push(<Password {...obj} />)
-                    break;
-                case "textarea":
-                    childNodes.push(<Textarea {...obj} />)
-                    break;
-                case "radio":
-                    childNodes.push(<Radio {...obj} />)
-                    break;
-                case "select":
-                    childNodes.push(<Select {...obj} />)
-                    break;
-                default:
-                    childNodes.push(<input {...obj} />)
-            }
-        }, this)
-
-        return (
-            <div>
-                <form onSubmit={this.props.onSubmit}>
-                    <Title title={this.props.title} />
-                    {childNodes}
-                    <button>Submit</button>
-                </form>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <form onSubmit={this.props.onSubmit}>
+          <h2>{this.props.title}</h2>
+          {childNodes}
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
 }
-
 
 export default GenericForm;
