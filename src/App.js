@@ -12,7 +12,7 @@ class App extends Component {
     let myFields = {
       title: 'Register Form',
       fields: [
-        { label: 'E-mail', name: 'email', type: 'text', value: 'val', placeholder: 'Insert an e-mail', validations: [] },
+        { label: 'Email', name: 'email', type: 'text', value: 'val', placeholder: 'Insert an e-mail', validations: [] },
         { label: 'Password', name: 'password', type: 'password', value: 'password', placeholder: 'Insert a password' },
         { label: 'Comments', name: 'comments', type: 'textarea', value: 'val', placeholder: 'Add a comment' },
         { label: 'Select', name: 'select', type: 'select', value: ['Volvo', 'Saab', 'Opel', 'Audi', 'Bmw', 'Mercedes'] },
