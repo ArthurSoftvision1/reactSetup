@@ -2,12 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 
 class CustomSelect extends Component {
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    let field = event.target;
+    this.props.onChange(field.name, field.value);
+  }
+
   render() {
 
     let labelText = this.props.type === "select" ? this.props.label : this.props.name
 
     let selectNodes = [];
-    let value = this.props.value;
+    let value = this.props.options;
 
     for (let i = 0; i < value.length; i++) {
 
@@ -22,7 +32,7 @@ class CustomSelect extends Component {
     return (
       <div className="form-group">
         <label>{labelText}</label>
-        <select name={this.props.name}>
+        <select name={this.props.name} onChange = {this.onChange}>
           {selectNodes}
         </select>
       </div>
