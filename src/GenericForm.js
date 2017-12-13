@@ -12,26 +12,42 @@ class GenericForm extends Component {
     this.handleFieldChange = this.handleFieldChange.bind(this);
     let childrenObj = {};
     this.props.fields.forEach(function (el, i) {
-      let obj = { ...el, key: el.name }; // TODO: improve this key to make sure it is unique - prevent from allowing duplicate keys in hash
-      childrenObj[el.name]= obj;
+      let obj = { ...el, key: el.name };
+      childrenObj[el.name] = obj;
     });
-    this.state ={
+    this.state = {
       isValid: false,
       isComplete: false,
       fields: childrenObj
     };
   }
 
-  handleFieldChange(field, value) {
-    console.log("We are updating '"+ field + "' with: '"+ value);
+  handleFieldChange(field, newValue) {
+    console.log("We are updating '"+ field + "' with: '"+ newValue);
     let updatedFields = this.state.fields;
-    updatedFields[field].value = value;
-    this.setState({ fields: updatedFields });
+
+    if (field === 'gender') {
+      
+      for (let i = 0; i < updatedFields.gender.options.length; i++) {
+        let radioOption = updatedFields.gender.options[i];
+        if (radioOption.value === newValue) {         
+          radioOption.selected = true;
+        } else {
+          radioOption.selected = false;
+        }
+      }
+
+      this.setState({ fields: updatedFields });      
+
+    } else {
+      updatedFields[field].value = newValue;
+      this.setState({ fields: updatedFields });
+    }
   }
+
   render() {
     let childNodes = [];
     let fields = this.state.fields;
-
     for (var key in fields) {
        if (fields.hasOwnProperty(key)) {
           let el = fields[key];
@@ -45,7 +61,7 @@ class GenericForm extends Component {
             case "textarea":
               childNodes.push(<CustomTextarea {...el} onChange={this.handleFieldChange} />)
               break;
-            case "radio":
+            case "radio":              
               childNodes.push(<CustomRadio {...el} onChange={this.handleFieldChange} />)
               break;
             case "select":
